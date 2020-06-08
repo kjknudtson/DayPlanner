@@ -21,7 +21,7 @@ currentDay.append(todayDate);
 
 function renderSchedulePlans() {
 
-    var allDayEvents = JSON.parse(localStorage.getItem("plannedEvent")) || [];
+    var allDayEvents = JSON.parse(localStorage.getItem("plannedEvents")) || [];
     
         $(".description").each(function() {
         for (var i = 0; i < allDayEvents.length; i++) {
