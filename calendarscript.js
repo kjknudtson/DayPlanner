@@ -1,57 +1,81 @@
 let todayDate = moment().format('LLLL');
 
 
-let hour24 = moment().format('H');
 
-let hour12 = moment().format('h');
+
+let hour24 = moment().format('H');
 
 var currentDay = $("#currentDay");
 
-var textArea = $(".col-md-8");
+var textArea = $(".description");
+
+var rowDiv = $(".time-block");
+
+var allDayEvents = [];
 
 console.log(hour24);
 
 currentDay.append(todayDate);
 
-var nineHour = $("hour-9");
 
-var tenHour = $("hour-10");
 
-var elevenHour = $("hour-11");
+function renderSchedulePlans() {
 
-var noonHour = $("hour-12");
+    var allDayEvents = JSON.parse(localStorage.getItem("plannedEvent")) || [];
+    
+        $(".description").each(function() {
+        for (var i = 0; i < allDayEvents.length; i++) {
+            textArea.text = allDayEvents[i];
+      
+            
 
-var oneHour = $("hour-13");
 
-var twoHour = $("hour-14");
+        }
+        })
 
-var threeHour = $("hour-15");
 
-var fourHour = $("hour-16");
+}
 
-var fiveHour = $("hour-17");
 
-var hoursArray = [nineHour, tenHour, elevenHour, noonHour, oneHour, twoHour, threeHour, fourHour, fiveHour];
 
-for (var i = 0; i < hoursArray.length; i++){
 
-    for (var a = 9; a < 18; a++) {
-        hoursArray[i].textarea.setAttribute("id", "a");
 
-        console(log).hoursArray[i].textarea.id;
+$(".time-block").each(function() {    
+
+    if (this.id < hour24) {
+        $(this).addClass("past");
+    } else if (this.id == hour24) {
+        $(this).addClass("present");
+    } else {
+        $(this).addClass("future");
+
     }
 
+})
 
-}
+$( ".saveBtn" ).click(function() {
+    event.preventDefault();
+    $(".description").each(function() {
+        
+        var scheduleItem = textArea.text;
+        
+        if (scheduleItem === "") {
+            allDayEvents.push("");
+
+        } else {
+            allDayEvents.push(scheduleItem);
+        }
+    })
+    
+    localStorage.setItem("plannedEvents", JSON.stringify(allDayEvents));
+    console.log(localStorage);
+  });
 
 
-if (textArea.id > hour12.value) {
-    textArea.attr("class", "future");
-} else if (textArea.id === hour24.value) {
-    textArea.attr("class", "present");
-} else {
-    textArea.attr("class", "past");
-}
+
+renderSchedulePlans();  
+
+
 
 
 
