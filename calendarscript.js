@@ -21,17 +21,16 @@ currentDay.append(todayDate);
 
 function renderSchedulePlans() {
 
-    var allDayEvents = JSON.parse(localStorage.getItem("plannedEvents")) || [];
-    
-        $(".description").each(function() {
-        for (var i = 0; i < allDayEvents.length; i++) {
-            textArea.val() = allDayEvents[i];
-      
-            
+    $(".time-block").each(function()
+    {
+        var id = $(this).attr("id");
+        var schedule = localStorage.getItem(id);
 
-
+        if (schedule !== null)
+        {
+            $(this).children(".description").val(schedule);
         }
-        })
+    });
 
 
 }
@@ -53,19 +52,15 @@ $(".time-block").each(function() {
 
 })
 
-$( ".saveBtn" ).click(function() {
-    event.preventDefault();
-    $(".description").each(function() {
-        
-        var scheduleItem = textArea.val();
-        allDayEvents.push("scheduleItem");
-        
-     
-    })
-    
-    localStorage.setItem("plannedEvents", JSON.stringify(allDayEvents));
-    console.log(localStorage);
-  });
+var saveBtn = $(".saveBtn");
+
+saveBtn.on("click", function()
+{
+    var time = $(this).parent().attr("id");
+    var schedule = $(this).siblings(".description").val();
+
+    localStorage.setItem(time, schedule);
+});
 
 
 
