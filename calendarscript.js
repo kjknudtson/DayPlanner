@@ -25,7 +25,7 @@ function renderSchedulePlans() {
     
         $(".description").each(function() {
         for (var i = 0; i < allDayEvents.length; i++) {
-            textArea.text = allDayEvents[i];
+            textArea.val() = allDayEvents[i];
       
             
 
@@ -57,14 +57,9 @@ $( ".saveBtn" ).click(function() {
     event.preventDefault();
     $(".description").each(function() {
         
-        var scheduleItem = textArea.text;
+        var scheduleItem = textArea.val();
         
-        if (scheduleItem === "") {
-            allDayEvents.push("");
-
-        } else {
-            allDayEvents.push(scheduleItem);
-        }
+     
     })
     
     localStorage.setItem("plannedEvents", JSON.stringify(allDayEvents));
