@@ -58,6 +58,7 @@ $( ".saveBtn" ).click(function() {
     $(".description").each(function() {
         
         var scheduleItem = textArea.val();
+        allDayEvents.push("scheduleItem");
         
      
     })
